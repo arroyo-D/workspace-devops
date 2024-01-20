@@ -7,15 +7,15 @@
 * MODULO (quitarme todo este año)
 * LEER (Leer 1 libro al mes)
 * EJERCICIO (Ser mas constante con el ejercicio)
-* ADELGAZAR (bajar a los 92 kg)
+* ADELGAZAR (bajar a los 92 kg) {:$/personal/peso_medidas:}
 
 *PROFESIONALES*
 
 * CERTIFICACIONES
-** AWS{:./programacion/AWS.norg:}
-** KUBERNETES{:./programacion/kubernetes.norg:}
+** AWS {:$/personal/programacion/AWS:}
+** KUBERNETES {:$/programacion/kubernetes:}
 * LENGUAGES PROGRAMACION
-** GO {:./programacion/GO.norg:}
-** SHELL {:./programacion/shell:}
+** GO {:$/programacion/GO:}
+** SHELL {:$/programacion/shell:}
 
 
