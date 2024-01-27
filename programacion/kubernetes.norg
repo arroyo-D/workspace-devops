@@ -1,0 +1,5 @@
+- *Entornos locales(gratuitos)* = Docker Desktop, Minikube, Kind, Microk8s, K3s, K3d
+- *Operadores* = Kubeadm, Kops
+- *Infraestructura como codigo* = Terraform, Ansible
+- *Laboratorios en la nube* = Play with Kubernets PWK, Katacoda
+

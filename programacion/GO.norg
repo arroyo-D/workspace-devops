@@ -9,3 +9,7 @@
   ahora le decimos a otra variable que coja su valor con el mismo espacio en memoria *"p := x"*
   si imprimieramos su valor nos daria el valor del espacio en memoria si quisieramos saber su valor seria *(*p)* 
   y si queremos cambiar el valor de x desde la nueva variable seria *"*p = 2"*
+
+* *PAQUETES para recordar*
+  - Flag -> Este paquete proporciona una forma fácil de definir y analizar las banderas de línea de comandos.(las banderas = argumentos)
+  
