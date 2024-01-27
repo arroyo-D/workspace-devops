@@ -3,3 +3,62 @@
 - *Infraestructura como codigo* = Terraform, Ansible
 - *Laboratorios en la nube* = Play with Kubernets PWK, Katacoda
 
+* *Que es un cluster?* 
+
+  Un cluster es un grupo de maquinas llamados nodos con  aplicaciones encapsuladas en contenedores en funcionamiento
+
+* *Que es los control-plane?* 
+ 
+  Son los nodos en kubernetes que tiene la responsabilidad de coordinar las actividades del cluster(Para garantizar la alta disponibilidad lo recomendado es tener 3 maquinas con la configuracion en el cluster)
+
+** *Componentes control-plane* 
+
+*** _kube-apiserver_ -> expone la API de kubernetes(es la interfaz de comunicacion para acceder al plano control)
+    {https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/}
+
+*** _etcd_ -> Almacenamiento de llave valor, sirve para almacenar toda la informacion del cluster
+    {https://etcd.io/docs/v3.5/}
+
+*** _kube_scheduler_ -> tambien conocido como "Planificador" su responsabilidad es asignar un Pods a un nodo existente
+    {https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/}
+
+*** _kube_controler_manager_ -> tiene diferentes controladores que componen el binario
+    {https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/}
+
+      - Node controller : Responsable de notificar y responder cuando un nodo deja de funcionar
+      - Replication controller : Responable de mantener el numero correcto de Pods para cada una de las replicas 
+      - Endpoints controller : Enlaza pods con los servicios
+      - Service Accounts & Token controller : Responsable de crear las cuentas predeterminadas y los tokens de acceso en los nuevos namespace
+
+** *Componenetes nodo*
+
+*** _kube proxy_ -> gestiona las reglas de redes y esta presente en todos los nodos del cluster, su objetivo es proporcionar una buena comunicacion entre nodos 
+    {https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/}
+
+*** _kubelet_ -> su mision es garantizar que cada contenedor este funcionando dentro de un Pod 
+    {https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/}
+
+*** Container Runtime -> componente del software responsable de ejecutar los contenedores, se suelen usar containerd, cri-o 
+    {https://github.com/kubernetes/community/blob/master/contributors/devel/sig-node/container-runtime-interface.md}
+
+** *Complementos en kubernetes*
+
+*** DNS -> comple(CoreDNS) su funcion dentro del cluster es gestionar los registros de los servicios asi como la deteccion y descubrimiento de los mismos 
+
+*** _Conexiones y Politicas de redes_ -> comple(Calico,Flannel, Cilium) complementos que garantizan y gestionan las politicas de redes
+
+
+
+
+
+
+
+
+* *_COMANDOS_*
+
+** *kubectl get pods --namespace kube-system --field-selector spec.nodeName=book-control-plane*
+
+** *kubectl get pods --namespace kube-system --field-selector spec.nodeName=book-worker*
+
+
+
