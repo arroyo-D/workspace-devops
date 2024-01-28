@@ -45,7 +45,66 @@
 
 *** DNS -> comple(CoreDNS) su funcion dentro del cluster es gestionar los registros de los servicios asi como la deteccion y descubrimiento de los mismos 
 
-*** _Conexiones y Politicas de redes_ -> comple(Calico,Flannel, Cilium) complementos que garantizan y gestionan las politicas de redes
+*** _Conexiones y Politicas de redes_ -> comple(Calico, Flannel, Cilium) complementos que garantizan y gestionan las politicas de redes
+
+
+* *Objetos en Kubernetes*
+
+   Son las entidades que persisten en el sistema, especificamente en el componente /etcd/ (los mas utilizados son Pods, Deployments, ConfigMaps y Secrets), cada objeto representa un estado en /kubernetes/. Para crear modificar o eliminar objetos tiene que utilizarse la API de kubernetes 
+
+** *Spec y Status* 
+
+   Cada objeto en kubernetes esta compuesto por dos campos anidados, donde cada uno es otro objeto
+
+*** Spec -> describe las caracteristicas del estado deseado y proporcionado desde el cliente 
+
+*** Status -> representa el estado actual dentro del cluster y es actualizado por el sistema
+
+** *Comandos desde kubectl*
+ 
+*** Gestion Declarativa -> 
+    La forma recomendada de gestionar los recursos es a traves de los ficheros declarativos llamados 'Resource Config' y del commando /*apply*/ ej: 
+    
+    /*kubectl apply -f nombre-del-fichero.yml*/ 
+    
+    `siempre que creemos un objeto a traves de un archivo YML existen cuatro elementos que no pueden faltar`
+
+    `- apiVersion -> Especifica la version de Kubernet4es utilizada para crear el objeto`
+    `- Kind -> Tipo de objetos que se desea crear`
+    `- metadata -> Informacion para identificar d eforma unica el objeto`
+    `- spec -> Descripcion del estado que se desea que obtenga el objeto dentro del cluster`
+
+*** Gestion Imperativa -> 
+    Indica la accion que debe realizarse en cada comando ej:
+    
+    /*kubectl create deployment "deployment name"*/ (para crear un objeto)
+    
+    /*kubectl delete pod "pod name"*/ (para borrar un objeto Pod)
+
+    /*kubectl set resource deployment "deployment-name"*/ (para asignar recursos a un objeto Deployment)
+
+*** Impresion de Estados -> 
+    Muestra el estado y la descripcion del objeto, mostrar campos especificos de un objeto, realizar consultas a los objetos en base a etiquetas
+
+*** Interaccion con contenedores -> 
+    permite depurar los procesos en ejecucion dentro del cluster y para ello cuenta con comandos para: 
+
+    - Imprimir los logs de los contenedores 
+    - Imprimir los eventos realizados en el cluster 
+    - Acceder al contenedor par aefectuar comandos 
+    - Copiar ficheros desde la maquina local hacia el contenedor
+
+*** Gestion del Cluster ->
+    Son comandos que nos ayudan a realizar operaciones de mantenimiento en el cluster como por ejemplo: /*drain*/, /*uncordon*/, /*cordon*/, entre otros.
+
+*** Tipos de objetos Disponibles -> 
+    Siempre que necesitemos tener informacion asociada a los tiops de objetos, sus alias, y grupo al que pertenece, podemos utilizar el comando /*api-resources*/
+
+    /*kubectl api-resource*/ (nos muestra la informacion de los objetos que tenemos)
+
+
+
+
 
 
 
