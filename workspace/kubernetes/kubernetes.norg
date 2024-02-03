@@ -50,7 +50,7 @@
 
 * *Objetos en Kubernetes*
 
-   Son las entidades que persisten en el sistema, especificamente en el componente /etcd/ (los mas utilizados son Pods, Deployments, ConfigMaps y Secrets), cada objeto representa un estado en /kubernetes/. Para crear modificar o eliminar objetos tiene que utilizarse la API de kubernetes 
+   Son las entidades que persisten en el sistema, especificamente en el componente /*etcd*/ (los mas utilizados son Pods, Deployments, ConfigMaps y Secrets), cada objeto representa un estado en /*kubernetes*/. Para crear modificar o eliminar objetos tiene que utilizarse la API de kubernetes 
 
 ** *Spec y Status* 
 
@@ -63,10 +63,11 @@
 ** *Comandos desde kubectl*
  
 *** Gestion Declarativa -> 
-    La forma recomendada de gestionar los recursos es a traves de los ficheros declarativos llamados 'Resource Config' y del commando /*apply*/ ej: 
+    La forma recomendada de gestionar los recursos es a traves de los ficheros declarativos llamados 'Resource Config' y del commando /*apply*/ ej:  
+
+    */kubectl apply --filename "carpeta donde se encuentre el POD ejem: (pods/pod-01.yaml)" >/* `crea un pod con el archivo .yaml` 
     
-    /*kubectl apply -f nombre-del-fichero.yml*/ 
-    
+
     `siempre que creemos un objeto a traves de un archivo YML existen cuatro elementos que no pueden faltar`
 
     `- apiVersion -> Especifica la version de Kubernet4es utilizada para crear el objeto`
@@ -77,21 +78,32 @@
 *** Gestion Imperativa -> 
     Indica la accion que debe realizarse en cada comando ej:
     
-    /*kubectl create deployment "deployment name"*/ (para crear un objeto)
+    /*kubectl create deployment "deployment name"*/ `para crear un objeto`
     
-    /*kubectl delete pod "pod name"*/ (para borrar un objeto Pod)
+    /*kubectl delete pod "pod name"*/ *`ó`* */kubectl delete -f "fichero de descripcion ejem: (pods/pod-01.yaml)"/* `para borrar un Pod`
 
-    /*kubectl set resource deployment "deployment-name"*/ (para asignar recursos a un objeto Deployment)
+    /*kubectl set resource deployment "deployment-name"*/ `para asignar recursos a un objeto Deployment`
 
 *** Impresion de Estados -> 
     Muestra el estado y la descripcion del objeto, mostrar campos especificos de un objeto, realizar consultas a los objetos en base a etiquetas
 
+    */kubectl get pods/*  `observa el estado de cada pod`
+    - */-o wide/* `muestra mas valores de los pods como la IP o el nodo donde se ejecuta el contenedor`
+
+    */kubectl describe "nombre del pod"/* *`ó`* */kubectl get pod "nombre del pod"/* `sirve para conocer el estado del pod`
+
+
 *** Interaccion con contenedores -> 
     permite depurar los procesos en ejecucion dentro del cluster y para ello cuenta con comandos para: 
 
-    - Imprimir los logs de los contenedores 
+    - Imprimir los logs de los contenedores
+      
+      */kubectl logs "nombre pod" --follow/* `ver los registros del contenedor dentro del pod especificado y mantener la conexión abierta para recibir actualizaciones en tiempo real.`
     - Imprimir los eventos realizados en el cluster 
-    - Acceder al contenedor par aefectuar comandos 
+    - Acceder al contenedor par efectuar comandos
+
+      */kubectl exec -it pod "nombre del pod" -- /bin/sh/* `para acceder al Pod`
+
     - Copiar ficheros desde la maquina local hacia el contenedor
 
 *** Gestion del Cluster ->
@@ -102,15 +114,37 @@
 
     /*kubectl api-resource*/ (nos muestra la informacion de los objetos que tenemos)
 
+* *Pods*
+  
+  Un pod es la unidad basica en kubernetes, sus principales caracteristicas: 
+  - Encapsula uno o varios contenedores en ejecucion
+  - Tiene asignada una IP, que todos los contenedores la comparten ademas de sus */puertos/*
+  - lo contenedores del POD pueden comunicarse entre si utilizando localhost.
+  
+** *Estados*
+   Los posibles estados que puede tener un Pod durante su ciclo de vida son: 
 
+*** Pending -> 
+    El pod ha sido aceptado por kubernetes, pero uno o varios contenedores del Pod no han sido creados. Esta fase incluye el tiempo de asignacion del Pod a un nodo y el de descarga de las imagenes de los contenedores.
 
+*** Running -> 
+    El pod ha sido asignado a un ndood y se han creado todos los contenedores. Al menos un contenedor esta en funcionamiento o en el proceso de inicio/reinicio
 
+*** Succeded -> 
+    Todos los contenedores en el Pod han terminado correctamente y no seran reiniciados
 
+*** Failed -> 
+    Todos los contenedores en el Pod han terminado y al menos uno de ellos ha terminado con problemas
 
+*** Unknow ->
+    Por alguna razon no se puede obtener el estado del Pod. Esto sucede casi siempre cuando existen problemas de comunicacion en el nodo del Pod
 
-
-
-
+** *Varaibles de entorno*
+   Las variables de entorno sirven para modificar el comportamiento de las aplicaciones sin necesidad de modificar el codigo fuente o la imagen del contendor.
+   
+   - (!)Las variables de entorno se definen para los */contenedores/* no para el pod. 
+   - En el caso de un Pod con varios contenedores, las variables de entorno de uno de ellos no tendra efecto para el resto de contenedores.
+   - la definicion de las varaibles de entorno aparece reflejada en la seccion */env/*. 
 
 
 * *_COMANDOS_*
