@@ -1,0 +1,37 @@
+º → todas las operaciones sobre el datalake que requieran conectarse a los nodos iria: WSL/MOBA → Bastión <INT/PRO/DEV> → nodo
+
+```go
+./bastion.sh int
+```
+
+2º → despues de conectarnos al bastión iriamos a un worker(porque ademas de actuar como workers, tambien tienen gateways de servicio(swicht de comandos que se utilizan para operar los servicios))
+
+```go
+ctrl + R -> wrk
+ssh -i "$HOME/Orange_int.pem" cloudbreak@cdp-int-wrkr1
+```
+
+3º → nos conectamos al usuario capaz de realizar estas operaciones en KEEPASS para conectarnos mediante kerberos
+
+```go
+kinit <USUARIO>
+```
+
+4º → Como operamos en HIVE nos meteremos en su consola de comandos
+
+```go
+beeline
+```
+
+5º → vemos/creamos la/s base de datos
+
+@code lang
+
+show databases; 
+//enseña las bases de datos que hay en el cluster
+describe database <nombre base de datos>;
+//enseña en nombre de la tabla la ubicacion de ficheros en RAW
+create database <nombre base de datos>;
+//crea una base de datos con la ubicacion por defecto
+
+@end

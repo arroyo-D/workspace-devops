@@ -1,0 +1,43 @@
+- (x) Primero nos tendremos que conectar al bastion con nuestro script
+
+@code lang
+
+./bastionport.sh pro
+
+@end
+
+2 → Revisamos si tenemos al usuario 
+
+@code lang
+
+cat /etc/passwd | grep <nombre de usuario(sin @orange...)>
+
+@end
+
+3 → nos concectamos como root
+
+@code lang
+
+sudo su -
+
+@end
+
+4 → Usamos el script llamado create-users.sh
+
+@code lang
+
+./create-users.sh <nombre usuario(sin @orange...)>
+
+@end
+
+5 → Nos descargamos el archivo para poder pasarlo via teams al compañero (desde nuestra terminal)
+
+@code lang
+
+//haremos un cat al script de bastion para poder coger el ssh del entorno
+cat bastion.sh
+//cogeremos el entorno donde lo hayamos creado y sustituimos ssh por scp
+scp ..........................://tmp/<nombre archivo> .
+//scp + .ssh...... + (sin espacios) ://ruta del archivo + con un espacio le indicamos la ruta que queremos en mi caso sera . para que se guarde en el mismo sitio donde estoy
+
+@end
