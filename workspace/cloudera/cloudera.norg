@@ -1,0 +1,19 @@
+El Software base de todo el cluster se encuentra en la carpeta de /opt/cloudera dentro encontraremos opt/cloudera/parcel-repo que es donde se descargaran los paquetes los cuales se extraeran en la carpeta /opt/cloudera/parcels en la cual se encuentra la carpeta /opt/cloudera/parcels/CDH donde ademas de ver la versión que tenemso de cloudera se encontraran los directorios de bin , etc , jar , lib.
+
+-  bin → ejecutables  
+
+- etc → archivos de configuración
+
+- lib → librerías
+
+- jar → ejecutables de java
+
+Si queremos los procesos que se estan ejecutando dentro de nuestra “máquina” iremos a la carpeta **/var/run** en la cual encontraremos **/var/run/cloudera-scm-agent** la cual tiene cuatro carpetas: cgroups, events, process, supervisor.
+
+- cgroups → gestiona y controla recursos
+
+- events → lleva el flujo y transmision de eventos
+
+- process → procesos, roles, demonios que estan corriendo en la máquina
+
+- supervisor → archivos de configuración del **“AGENTE”**
